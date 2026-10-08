@@ -4,3 +4,7 @@ report*.json
 *.ns.conf
 !examples/sample.ns.conf
 ns.conf
+__pycache__/
+*.pyc
+report*.html
+report*.json

@@ -6,6 +6,7 @@ import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from report import render_html
 
 ADVISORY = 'https://support.citrix.com/external/article?articleNumber=CTX697096'
 SCORES = {'88771':9.5,'88772':9.5,'88773':9.3,'88774':7.0,'88775':8.8,'88776':8.8,'88777':8.8,'88778':8.8}
@@ -88,7 +89,9 @@ def main():
     p.add_argument('--build',help='Build, e.g. 14.1-73.20 (optional; unknown if missing)')
     p.add_argument('--edition',choices=('standard','fips','ndcpp'),default='standard')
     p.add_argument('--tcp-params',type=Path,help='Text output of show ns tcpparam (optional)')
-    p.add_argument('--output',type=Path,help='Write JSON report to local path')
+    p.add_argument('--output',type=Path,help='Write JSON report to local path (legacy alias)')
+    p.add_argument('--json',type=Path,help='Write JSON report to local path')
+    p.add_argument('--html',type=Path,help='Write standalone HTML executive report to local path')
     args=p.parse_args()
     try:
         conf=args.config.read_text(encoding='utf-8-sig')
@@ -98,9 +101,14 @@ def main():
     if not conf.strip(): p.error('Configuration file is empty; cannot assess preconditions')
     result=evaluate(conf,args.build or '',args.edition,tcp)
     result_text=json.dumps(result,indent=2,ensure_ascii=False)
-    if args.output:
-        try: args.output.write_text(result_text+'\n',encoding='utf-8')
-        except OSError as ex: p.error(f'Cannot write output: {ex}')
-    else: print(result_text)
+    if args.output and args.json and args.output != args.json:
+        p.error('Use either --output or --json, not both with different destinations')
+    json_path = args.json or args.output
+    try:
+        if json_path: json_path.write_text(result_text+'\n',encoding='utf-8')
+        if args.html: args.html.write_text(render_html(result),encoding='utf-8')
+    except (OSError,UnicodeError) as ex:
+        p.error(f'Cannot write report: {ex}')
+    if not json_path and not args.html: print(result_text)
     return 0
 if __name__=='__main__':sys.exit(main())

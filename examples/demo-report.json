@@ -1,0 +1,75 @@
+{
+  "tool": "NetScaler Defensive Checker",
+  "generated_utc": "2026-10-08T00:47:13.033744+00:00",
+  "advisory": "https://support.citrix.com/external/article?articleNumber=CTX697096",
+  "build": "14.1-73.20",
+  "edition": "standard",
+  "build_status": "affected_build",
+  "build_reason": "Build below fixed 14.1-73.37",
+  "configuration_provided": true,
+  "tcp_parameters_provided": true,
+  "limitations": [
+    "Offline configuration and build assessment, not exploitation confirmation",
+    "Absence of matched lines does not prove absence of a prerequisite; export may be incomplete",
+    "CVE-2026-88774 and CVE-2026-88777 require manual review of policies, bindings and settings",
+    "No indicators-of-compromise assessment is performed"
+  ],
+  "results": [
+    {
+      "cve": "CVE-2026-88771",
+      "cvss_v4": 9.5,
+      "status": "potentially_exposed",
+      "observation": "No additional feature prerequisite",
+      "matched_config_lines": 0
+    },
+    {
+      "cve": "CVE-2026-88772",
+      "cvss_v4": 9.5,
+      "status": "precondition_not_observed",
+      "observation": "DTLS enabled or default-on SSL VPN detected",
+      "matched_config_lines": 0
+    },
+    {
+      "cve": "CVE-2026-88773",
+      "cvss_v4": 9.3,
+      "status": "potentially_exposed",
+      "observation": "HTTP/SSL virtual server detected",
+      "matched_config_lines": 2
+    },
+    {
+      "cve": "CVE-2026-88774",
+      "cvss_v4": 7.0,
+      "status": "precondition_not_observed",
+      "observation": "HTTP URL expression detected (heuristic; manual policy review required)",
+      "matched_config_lines": 0
+    },
+    {
+      "cve": "CVE-2026-88775",
+      "cvss_v4": 8.8,
+      "status": "potentially_exposed",
+      "observation": "VPN or authentication virtual server detected",
+      "matched_config_lines": 1
+    },
+    {
+      "cve": "CVE-2026-88776",
+      "cvss_v4": 8.8,
+      "status": "potentially_exposed",
+      "observation": "ORACLE load-balancing virtual server detected",
+      "matched_config_lines": 1
+    },
+    {
+      "cve": "CVE-2026-88777",
+      "cvss_v4": 8.8,
+      "status": "precondition_not_observed",
+      "observation": "Potential non-HTTP L7 or CGNAT/NAT64 precondition detected; review bindings",
+      "matched_config_lines": 0
+    },
+    {
+      "cve": "CVE-2026-88778",
+      "cvss_v4": 8.8,
+      "status": "precondition_not_observed",
+      "observation": "TCP virtual server and Enhanced ISN disabled",
+      "matched_config_lines": 3
+    }
+  ]
+}

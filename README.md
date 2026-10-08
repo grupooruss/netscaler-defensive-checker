@@ -49,6 +49,20 @@ python -m unittest discover -s tests -v
 
 ## Responsible use
 
-Only inspect configurations you own or have permission to assess. Never commit real exports or results containing internal details. License: MIT. This is an independent Grupo Oruss | Division81 Defensive Security Research project, not affiliated with or endorsed by Citrix/NetScaler.
+Only inspect configurations you own or have permission to assess. Never commit real exports or results containing internal details. License: MIT. This is an independent By Grupo Oruss | Division81 Defensive Security Researchproject, not affiliated with or endorsed by Citrix/NetScaler.
 
 Sources: [Citrix CTX697096](https://support.citrix.com/external/article?articleNumber=CTX697096), [CISA notice](https://content.govdelivery.com/accounts/USDHSCISA/bulletins/42cc465).
+
+## v1.1 — HTML executive report + JSON export
+
+Generate both formats locally using the same read-only assessment:
+
+```bash
+python checker.py --config examples/sample.ns.conf --build 14.1-73.20 \
+  --tcp-params examples/tcpparam.txt --json report.json --html report.html
+```
+
+On Windows PowerShell, run the command on one line or use the PowerShell backtick for continuation.
+Open `report.html` locally in a browser; it is a standalone file with embedded CSS, no external scripts, assets or telemetry. `--output` remains a backward-compatible alias for `--json`. The HTML provides a KPI summary, findings for all eight CVEs, recommended actions and assessment caveats. It excludes raw configuration and matched lines; nevertheless, verify reports before sharing.
+
+**Important:** Assessments on fixed builds are not evidence of absence of historic compromise. Consult the Citrix bulletin and CISA guidance for patching, indicators of compromise, and forensic preservation.
