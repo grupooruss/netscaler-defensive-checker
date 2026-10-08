@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+report*.json
+*.ns.conf
+!examples/sample.ns.conf
+ns.conf
