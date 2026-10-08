@@ -49,7 +49,7 @@ python -m unittest discover -s tests -v
 
 ## Responsible use
 
-Only inspect configurations you own or have permission to assess. Never commit real exports or results containing internal details. License: MIT. This is an independent By Grupo Oruss | Division81 Defensive Security Researchproject, not affiliated with or endorsed by Citrix/NetScaler.
+Only inspect configurations you own or have permission to assess. Never commit real exports or results containing internal details. License: MIT. This is an independent By Grupo Oruss | Division81 Defensive Security Research project, not affiliated with or endorsed by Citrix/NetScaler.
 
 Sources: [Citrix CTX697096](https://support.citrix.com/external/article?articleNumber=CTX697096), [CISA notice](https://content.govdelivery.com/accounts/USDHSCISA/bulletins/42cc465).
 
